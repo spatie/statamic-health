@@ -5,7 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/spatie/statamic-health/Check%20&%20fix%20styling?label=code%20style)](https://github.com/spatie/statamic-health/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/statamic-health.svg?style=flat-square)](https://packagist.org/packages/spatie/statamic-health)
 
-![Screenshot](./docs/screenshot.png)
+![Screenshot](https://github.com/spatie/statamic-health/raw/main/docs/screenshot.png)
 
 Using this addon you can monitor the health of your application by registering checks.
 
