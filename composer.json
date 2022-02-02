@@ -1,6 +1,6 @@
 {
     "name": "spatie/statamic-health",
-    "description": "Check the health of your Laravel app",
+    "description": "Check the health of your Statamic app",
     "keywords": [
         "spatie",
         "laravel",
@@ -17,8 +17,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "spatie/laravel-package-tools": "^1.9.2",
-        "illuminate/contracts": "^8.73"
+        "statamic/cms": "^3.2",
+        "spatie/laravel-health": "^1.0"
     },
     "require-dev": {
         "nunomaduro/collision": "^5.10",
@@ -52,13 +52,14 @@
         "sort-packages": true
     },
     "extra": {
+        "statamic": {
+            "name": "Health",
+            "description": "Check the health of your Statamic app"
+        },
         "laravel": {
             "providers": [
                 "Spatie\\StatamicHealth\\StatamicHealthServiceProvider"
-            ],
-            "aliases": {
-                "StatamicHealth": "Spatie\\StatamicHealth\\Facades\\StatamicHealth"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",

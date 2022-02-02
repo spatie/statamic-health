@@ -2,24 +2,30 @@
 
 namespace Spatie\StatamicHealth;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Spatie\StatamicHealth\Commands\StatamicHealthCommand;
+use Spatie\Health\Facades\Health;
+use Statamic\Facades\CP\Nav;
+use Statamic\Providers\AddonServiceProvider;
 
-class StatamicHealthServiceProvider extends PackageServiceProvider
+class StatamicHealthServiceProvider extends AddonServiceProvider
 {
-    public function configurePackage(Package $package): void
+    protected $widgets = [
+        Widgets\HealthCheck::class,
+    ];
+
+    protected $routes = [
+        'cp' => __DIR__ . '/../routes/cp.php',
+    ];
+
+    public function bootAddon()
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
-        $package
-            ->name('statamic-health')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_statamic-health_table')
-            ->hasCommand(StatamicHealthCommand::class);
+        if (Health::registeredChecks()->count() > 0 && config('health.statamic.enable_dashboard', true)) {
+            Nav::extend(function (\Statamic\CP\Navigation\Nav $nav) {
+                $nav->tools('Health')
+                    ->route('health.index')
+                    ->icon('charts');
+            });
+        }
+
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'statamic-health');
     }
 }
